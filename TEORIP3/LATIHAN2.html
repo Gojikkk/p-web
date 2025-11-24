@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>Hitung Penjumlahan</title>
+<script>
+function hitung() {
+    // Ambil nilai dari input
+    let angka1 = parseFloat(document.getElementById("jumlah1").value);
+    let angka2 = parseFloat(document.getElementById("jumlah2").value);
+
+    // Hitung jumlah
+    let hasil = angka1 + angka2;
+
+    // Tampilkan hasil di elemen <p>
+    document.getElementById("output").innerHTML = "Hasil: " + hasil;
+
+    // Supaya form tidak reload halaman
+    return false;
+}
+</script>
+</head>
+<body>
+<h2>Latihan Hitung dengan Submit</h2>
+
+<form onsubmit="return hitung();">
+     <input type="number" id="jumlah1"><br>
+    Angka 2: <input type="number" id="jumlah2"><br><br>
+    <input type="submit" value="Hitung">
+</form>
+
+<p id="output"></p>
+
+</body>
+</html>

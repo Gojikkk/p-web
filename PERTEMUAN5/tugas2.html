@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>TUGAS 2</title>
+        <script language="javascript">
+            function itung()
+            {
+                var nilai = parseFloat(document.getElementById("nilai").value);
+
+                var hasil = document.getElementById("hasil");
+                if(nilai >= 0 && nilai <= 40)
+                {
+                  hasil.value = "E";   
+                }
+                else if(nilai >= 41 && nilai <= 55)
+                {
+                    hasil.value = "D";
+                }
+                else if(nilai>= 56 && nilai <= 60)
+                {
+                    hasil.value = "C";
+                }
+                else if(nilai >= 61 && nilai <= 65)
+                {
+                    hasil.value = "BC";
+                }
+                else if(nilai >= 66 && nilai <= 70)
+                {
+                    hasil.value = "B";
+                }
+                else if(nilai >= 71 && nilai <= 80)
+                {
+                    hasil.value = "AB";
+                }
+                else if(nilai >= 81 && nilai <= 100)
+                {
+                    hasil.value = "A";
+                }
+                else
+                {
+                    hasil.value = "Tidak Valid";
+                }
+
+                return false;
+            }
+        </script>
+    </head>
+
+    <body bgcolor="lightblue" >
+        <form onsubmit="return itung()">
+            Nilai Anda : <input type="number" id="nilai" style="width: 5%;"><br><br>
+            Anda Mendapat Predikat : <input type="text" id="hasil" style="width: 5%;"><br><br>
+            <input type="submit" value="Hasilnya" style="text-align: center;">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ujian Tengah Semester</title>
+
+  <script language="javascript">
+    function showModal() {
+      document.getElementById("dataModal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("dataModal").style.display = "none";
+    }
+
+    function showForm() {
+        document.getElementById("yyy").style.display = "block";
+      document.getElementById("formPenelitian").style.display = "block";
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function tampilkanForm() {
+      const jenis = document.getElementById("jenis").value;
+      document.getElementById("paperForm").style.display = (jenis === "paper") ? "block" : "none";
+      document.getElementById("bukuForm").style.display = (jenis === "buku") ? "block" : "none";
+      document.getElementById("pengabdianForm").style.display = (jenis === "pengabdian") ? "block" : "none";
+    }
+
+    function kirimData() {
+      // Ambil input dari form
+      const inputs = document.querySelectorAll("#formPenelitian input[type='text']");
+      const nim = inputs[0].value.trim();
+      const nama = inputs[1].value.trim();
+      const semester = inputs[2].value.trim();
+
+      // Cek input kosong
+      if (nim === "" || nama === "" || semester === "") {
+        alert("Semua field wajib diisi!");
+        return;
+      }
+
+      // Validasi NIM dan Semester harus angka
+      if (isNaN(nim) || isNaN(semester)) {
+        alert("NIM dan Semester harus berupa angka!");
+        return;
+      }
+
+      // Validasi semester kurang dari 3
+      if (parseInt(semester) < 3) {
+        alert("Mahasiswa Belum bisa mengajukan pustaka digital!\nHarus semester 2 ke atas!");
+        return;
+      }
+
+      const jenis = document.getElementById("jenis").value;
+  let judul = "";
+  if (jenis === "paper") judul = document.querySelector("#paperForm input:nth-child(2)").value;
+  if (jenis === "buku") judul = document.querySelector("#bukuForm input:nth-child(2)").value;
+  if (jenis === "pengabdian") judul = document.querySelector("#pengabdianForm input:nth-child(2)").value;
+
+  // Tampilkan hasil
+  document.getElementById("outNim").textContent = nim;
+  document.getElementById("outNama").textContent = nama;
+  document.getElementById("outSemester").textContent = semester;
+  document.getElementById("outJenis").textContent = jenis || "-";
+  document.getElementById("outJudul").textContent = judul || "-";
+
+  document.getElementById("hasilOutput").style.display = "block";
+  alert("Data berhasil dikirim!");
+
+      // Jika semua validasi lolos
+      alert("Pengisian data berhasil!");
+    }
+
+    function closeOutput() {
+  document.getElementById("hasilOutput").style.display = "none";
+}
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #ffffff;
+    }
+
+    .header {
+      background-color: rgb(90, 90, 133);
+      color: white;
+      text-align: center;
+      padding: 8px;
+      font-size: 14px;
+    }
+
+    .judulatas {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      color: rgb(139, 139, 231);
+      text-align: center;
+      font-size: 14px;
+      margin: 10px 0;
+    }
+
+    .judulatas img {
+      width: 40px;
+      height: auto;
+    }
+
+    .main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      gap: 40px;
+    }
+
+    .text-section {
+      max-width: 500px;
+    }
+
+    .text-section h1 {
+      font-size: 28px;
+      color: #00205b;
+    }
+
+    .text-section h1 span.orange {
+      color: #ff9800;
+    }
+
+    .text-section h1 span.blue {
+      color: #007bff;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 18px;
+      margin: 8px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-blue {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      color: white;
+      border: none;
+      width: 7cm;
+      border-radius: 0;
+    }
+
+    .btnkluar {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      color: white;
+      border: none;
+      width: 10.5cm;
+      border-radius: 0;
+    }
+
+    .btn-outline {
+      border: 2px solid #007bff;
+      color: #007bff;
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .image-section img {
+      width: 280px;
+      border-radius: 0;
+    }
+
+    /* Modal Pop-up */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%; 
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 400px;
+      margin: 100px auto;
+      text-align: left;
+    }
+
+    .modal-content h2 {
+      color: #00205b;
+    }
+
+    .close {
+      background-color: #007bff;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      align-items: right;
+      display: flex;
+    }
+
+    /* Form Section */
+    .form-section {
+      display: none;
+      background-color: lightgray;
+      padding: 20px;
+      max-width: 400px;
+      margin: 120px auto;
+      border-radius: 8px;
+      justify-content: center;
+      display: flex;
+    }
+
+    .formyy{
+        display: none;
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%; 
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .headerform {
+      text-align: center;
+      color: white;
+      background-color: rgb(59, 109, 184);
+      padding: 8px;
+      font-size: 11px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .buatoutput{
+      display: none;
+      position: fixed;
+      background-color:  rgba(0,0,0,0.5);
+      z-index: 999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%; 
+    }
+
+    .headeroutput{
+      text-align: center;
+      background-color: lightgray;
+      font-size: 14px;
+      justify-content: center;
+      display: flex;
+    }
+    .keluar{
+      background-color: lightgray;
+      color: white;
+      text-align: left;
+      color: black;
+      padding: 20px;
+      margin: 120px auto;
+      justify-content: center;
+      display: flex;
+      width: 100%;
+      height: auto;
+    }
+
+    .hasil-box {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.hasil-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.hasil-header img {
+  width: 55px;
+  height: auto;
+}
+
+.hasil-header h4 {
+  color: #00205b;
+  margin: 0;
+}
+
+.hasil-box h3 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+    .logohasil{
+      display: flex;
+      justify-content: center;
+      width: 40px;
+      height: auto;
+    }
+    
+
+    input, select {
+      width: 96%;
+      margin-bottom: 10px;
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    label {  
+      font-size: 14px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <b>Ini adalah Ujian Tengah Semester Pemrograman Web. Klik ini untuk ke laman Fakultas Ilmu Komputer UPN Veteran Jakarta</b>
+  </div>
+
+  <div class="judulatas">
+    <img src="upn.png" alt="Logo UPNVJ">
+    <span>Sistem Pustaka Digital Ilmu Komputer Universitas Pembangunan Nasional Veteran Jakarta.</span>
+  </div>
+
+  <div class="main">
+    <div class="text-section">
+      <h1>Selamat Datang pada <br>
+        <span class="orange">Fakultas Ilmu</span> <span class="blue"><br><span class="orange">Komputer</span> UPN Veteran <br> Jakarta</span>
+      </h1>
+      <p>Sistem ini untuk sebagai tolak ukur pemahaman diri saya terhadap materi pemrograman web sistem informasi.</p>
+      <button class="btn btn-blue" onclick="showForm()">Mulai</button>
+      <button class="btn btn-outline" onclick="showModal()">Data Diri</button>
+    </div>
+
+    <div class="image-section">
+      <img src="fik.jpg" alt="Gedung Ilmu Komputer">
+    </div>
+  </div>
+
+  <!-- Modal Pop-up Data Diri -->
+  <div class="modal" id="dataModal">
+    <div class="modal-content">
+      <h2>Daftar Diri UPN Veteran Jakarta</h2>
+      <h2 style="color: black;">Mahasiswa Sistem Informasi Ilmu <br> Komputer</h2>
+      <p><b>Nama:</b> Usamah Ghozi Robbani</p>
+      <p><b>NIM:</b> 2410501048</p>
+      <p><b>Program Studi:</b> D3 Sistem Informasi</p>
+      <button class="close" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <div class="formyy" id="yyy">
+    <div class="form-section" id="formPenelitian">
+    <div class="headerform">
+      <p>FORM SISTEM REFERENSI DIGITAL MAHASISWA ILMU <br> KOMPUTER</p>
+    </div>
+
+    <input type="text" placeholder="NIM Mahasiswa">
+    <input type="text" placeholder="Nama Mahasiswa">
+    <input type="text" placeholder="Semester Mahasiswa">
+
+    <label>Pilih Penelitian:</label>
+    <select id="jenis" onchange="tampilkanForm()">
+      <option value="">Pilih Penelitian</option>
+      <option value="paper">Paper</option>
+      <option value="buku">Buku</option>
+      <option value="pengabdian">Jurnal Pengabdian</option>
+    </select>
+
+    <div id="paperForm" style="display:none;">
+      <input type="text" placeholder="Nama Penulis">
+      <input type="text" placeholder="Judul Paper">
+      <input type="text" placeholder="Tahun Publikasi">
+      <input type="text" placeholder="Volume, Edisi, Halaman">
+      <input type="text" placeholder="DOI">
+    </div>
+
+    <div id="bukuForm" style="display:none;">
+      <input type="text" placeholder="Nama Penulis Buku">
+      <input type="text" placeholder="Judul Buku">
+      <input type="text" placeholder="Tahun Publikasi Buku">
+      <input type="text" placeholder="Volume Buku">
+      <input type="text" placeholder="ISBN">
+    </div>
+
+    <div id="pengabdianForm" style="display:none;">
+      <input type="text" placeholder="Nama Penulis Jurnal">
+      <input type="text" placeholder="Judul Jurnal Pengabdian">
+      <input type="text" placeholder="Tahun Pengabdian">
+      <input type="text" placeholder="Volume Jurnal">
+      <input type="text" placeholder="Halaman">
+    </div>
+
+    <button class="btn btnkluar" onclick="kirimData()">Submit</button>
+    <button class="btn btnkluar" onclick="window.location.href='ujian.html'">Kembali ke Home</button>
+  </div></div>
+  
+  <div class="buatoutput" id="hasilOutput">
+  <div class="keluar">
+    <div class="hasil-box">
+      <div class="hasil-header">
+        <img src="upn.png" alt="Logo UPN">
+        <h4>UPN Veteran Jakarta</h4>
+      </div>
+
+      <h3>Hasil Pengisian Data Peneliti Mahasiswa</h3>
+      <div class="hasil-content">
+        <p><b>NIM:</b> <span id="outNim"></span></p>
+        <p><b>Nama:</b> <span id="outNama"></span></p>
+        <p><b>Semester:</b> <span id="outSemester"></span></p>
+        <p><b>Jenis Penelitian:</b> <span id="outJenis"></span></p>
+        <p><b>Judul Penelitian:</b> <span id="outJudul"></span></p>
+      </div>
+
+      <button class="btn btn-blue" onclick="closeOutput()">Tutup</button>
+    </div>
+  </div>
+</div>
+  
+</body>
+</html>

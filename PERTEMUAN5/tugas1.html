@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>TUGAS 1</title>
+<script language="javascript">
+    function hitung()
+    {      
+    var nilaiujian = parseFloat(document.getElementById("ujian").value);
+    var tugas = parseFloat(document.getElementById("tugas").value);
+    var project = parseFloat(document.getElementById("project").value)
+
+    
+    var hasil = (nilaiujian + tugas + project) / 3;
+
+
+    document.getElementById("output").value = hasil;
+
+    alert('Your Average is: '+hasil.toFixed(1));
+
+    return false;
+    }
+
+    function clear()
+    {
+        document.getElementById("ujian").value ="";
+        document.getElementById("tugas").value ="";
+        document.getElementById("project").value ="";
+        document.getElementById("output").value ="";
+    }
+    
+</script>
+</head>
+<body bgcolor="lightyellow">
+    <h1>Calculate Average</h1>
+    <h3>Enter the following information and then press the AVERAGE button to calculate your grade.</h3>
+
+    <h3>To clear the data fields, press the CLEAR button.</h3>
+    <form onsubmit="return hitung()">
+        <b>Enter Final Exam Grade: </b><input type="number"  id="ujian" style="width: 3%;"><br><br>
+        <b>Enter Homework Grade: </b><input type="number"  id="tugas" style="width: 3%;"><br><br>
+        <b>Enter Projects Grade: </b><input type="number"  id="project" style="width: 3%;"><br><br>
+
+        <input type="submit" value="AVERAGE" style="height: 5%; width: 7%;">
+    </form>
+    <form onsubmit="return clear()">
+        <input type="submit" value="CLEAR" style="height: 5%; width: 7%;" style="display: inline-block;">
+    </form>
+    <br>
+    <b>Your Average is: </b><input type="number" id="output" style="width: 3%;">
+    
+</body>
